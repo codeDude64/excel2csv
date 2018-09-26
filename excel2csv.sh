@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 #    excel2csv. Convert xls and xlsx files to csv 
 #    Copyright (C) 2018  Salvador Hernández López
@@ -19,3 +19,23 @@
 # Author - Salvador Hernández López
 # Email - chavatloz@gmail.com
 
+# if the var COMPARATION finish with .xls return the name
+#if not return ""
+
+if [ $# = 1 ];
+then
+echo "OK"
+    FILE=`echo $1 | grep '.xls\>'`
+    if [ "$FILE" == "" ];
+    then
+    echo "this not xls file"
+    fi
+else
+echo "You need just one parameter"
+exit
+fi
+
+
+#COMPARATION=`echo $1 | grep '.xls'`
+
+#echo $COMPARATION
