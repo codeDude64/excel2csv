@@ -25,8 +25,8 @@
 if [ $# = 1 ];
 then
 echo "OK"
-    FILE=`echo $1 | grep '.xls\>'`
-    if [ "$FILE" == "" ];
+    
+    if [ "`echo $1 | grep '.xls\>'`" == "" ];
     then
     echo "this not xls file"
     fi
