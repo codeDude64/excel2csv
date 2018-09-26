@@ -28,8 +28,12 @@ then
     
         if [ "`echo $1 | grep '.xls\>'`" == "" ];
         then
-            echo "this not xls file"
-
+            echo "this is not a xls file"
+        else
+        if [ "`echo $1 | grep '.xlsx\>'`" == "" ];
+        then
+            echo "this is not a xlsx file"
+        fi
         fi
 else
     echo "You need just one parameter"
