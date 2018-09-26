@@ -24,15 +24,16 @@
 
 if [ $# = 1 ];
 then
-echo "OK"
+    echo "OK"
     
-    if [ "`echo $1 | grep '.xls\>'`" == "" ];
-    then
-    echo "this not xls file"
-    fi
+        if [ "`echo $1 | grep '.xls\>'`" == "" ];
+        then
+            echo "this not xls file"
+
+        fi
 else
-echo "You need just one parameter"
-exit
+    echo "You need just one parameter"
+    exit
 fi
 
 
