@@ -22,7 +22,7 @@
 
 function XLS_LOGIC () {
     local COMMAND_OUTPUT=`xls2csv $1`
-    echo "$COMMAND_OUTPUT"
+    echo "$COMMAND_OUTPUT" | tr -d \"
 }
 
 
