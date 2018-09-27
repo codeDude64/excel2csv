@@ -29,11 +29,11 @@ then
         if [ "`echo $1 | grep '.xls\>'`" == "" ];
         then
             echo "this is not a xls file"
+            
+        
         else
-        if [ "`echo $1 | grep '.xlsx\>'`" == "" ];
-        then
-            echo "this is not a xlsx file"
-        fi
+            echo "this is a xls file"
+            # xls logic
         fi
 else
     echo "You need just one parameter"
