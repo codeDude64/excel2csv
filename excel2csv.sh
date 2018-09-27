@@ -19,8 +19,13 @@
 # Author - Salvador Hernández López
 # Email - chavatloz@gmail.com
 
-# if the var COMPARATION finish with .xls return the name
-#if not return ""
+
+function XLS_LOGIC () {
+    local COMMAND_OUTPUT=`xls2csv $1`
+    echo "$COMMAND_OUTPUT"
+}
+
+
 
 if [ $# = 1 ];
 then
@@ -39,11 +44,15 @@ then
         else
             echo "this is a xls file"
             # xls logic
+            XLS_LOGIC $1
         fi
 else
     echo "You need just one parameter"
     exit
 fi
+
+
+
 
 
 #COMPARATION=`echo $1 | grep '.xls'`
