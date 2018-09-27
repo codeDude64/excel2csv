@@ -22,7 +22,33 @@
 
 function XLS_LOGIC () {
     local COMMAND_OUTPUT=`xls2csv $1`
-    echo "$COMMAND_OUTPUT" | tr -d \"
+    local COMMA_OUTPUT=`echo "$COMMAND_OUTPUT" | tr -d \"`
+    printf "$COMMA_OUTPUT"
+
+    printf "\x$(printf %x 12)"
+    printf "\f"
+
+    #if [["$COMMA_OUTPUT" =~ *"\x$(printf %x 12)"*]]; then
+    #    printf "Si esta :v"
+    #fi
+
+    #if [["$COMMA_OUTPUT" =~ .*\f.*]]; then
+    #    printf "We are the champions"
+    #fi
+
+    #if ["$COMMA_OUTPUT" == *"\f"*]; then
+    #    printf "fuck"
+    #fi
+
+    #if [["$COMMA_OUTPUT" == *"\f"* ]]; then
+    #    printf "GOKUUUUUUUUU"
+    #fi
+
+    #if [-z "${COMMA_OUTPUT##*'\f'*}"]; then
+    #    printf "LOALA"
+    #fi
+    
+    echo "$COMMA_OUTPUT" | grep '\f'
 }
 
 
