@@ -29,7 +29,12 @@ then
         if [ "`echo $1 | grep '.xls\>'`" == "" ];
         then
             echo "this is not a xls file"
-            
+            if [ "`echo $1 | grep '.xlsx\>'`" == "" ];
+            then
+                echo "this is not a xlsx file"
+            else
+                echo "this is a xlsx file"
+            fi
         
         else
             echo "this is a xls file"
