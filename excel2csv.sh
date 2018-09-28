@@ -20,10 +20,15 @@
 # Email - chavatloz@gmail.com
 
 
+function XLSX_LOGIC () {
+    
+}
+
+
 function XLS_LOGIC () {
-    local COMMAND_OUTPUT=`xls2csv $1`
-    local COMMA_OUTPUT=`echo "$COMMAND_OUTPUT" | tr -d \"`
-    echo "$COMMA_OUTPUT" | cut -d '' -f 2
+    echo $1
+    libreoffice --headless --convert-to xlsx $1
+    XLSX_LOGIC $1"x"
 
 
 }
