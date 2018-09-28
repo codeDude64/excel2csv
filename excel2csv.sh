@@ -21,7 +21,24 @@
 
 
 function XLSX_LOGIC () {
+    #echo $1
+    local SHEET=`xlsx2csv -s 0 $1`
+    echo "$SHEET"
+    #local REGEX="\-+ [0-9]+ - ([^\n]+)([.]+)"
+    local REGEX="\-+ [0-9]+ - ([A-Za-z0-9]+)([.]+)"
+    if [[ $SHEET =~ $REGEX ]]
+    then
+        echo ${BASH_REMATCH[1]}
+    else
+        echo "No matchea"
+    fi
+
     
+
+    # xlsx2csv -s 0 GG.xlsx | grep  "\-\-\-\-\-\-\-\-.[0-9]"   Lista los numeros de las hojas
+    #xlsx2csv -s 0 GG.xlsx | grep  "\-\-\-\-\-\-\-\-.[0-9].-."  Lista los ------------ 1 -
+
+    #sheet=$1 regex=$2 group=$3  if [[ $sheet =~ $regex ]] then   echo ${BASH_REMATCH[$group]}; fi
 }
 
 
@@ -47,6 +64,7 @@ then
                 echo "this is not a xlsx file"
             else
                 echo "this is a xlsx file"
+                XLSX_LOGIC $1
             fi
         
         else
