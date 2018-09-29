@@ -42,8 +42,8 @@ function XLSX_LOGIC () {
 
 function XLS_LOGIC () {
     echo $1
-    libreoffice --headless --convert-to xlsx $1
-    XLSX_LOGIC $1"x"
+    libreoffice --headless --convert-to xlsx $1 && XLSX_LOGIC $1"x"
+    
 }
 
 if [ $# = 1 ];
