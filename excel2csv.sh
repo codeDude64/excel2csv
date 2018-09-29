@@ -23,12 +23,12 @@
 function XLSX_LOGIC () {
     #echo $1
     local SHEET=`xlsx2csv -s 0 $1`
-    echo "$SHEET"
+    #echo "$SHEET"
     #local REGEX="\-+ [0-9]+ - ([^\n]+)([.]+)"
-    local REGEX="\-+ [0-9]+ - ([A-Za-z0-9]+)([.]+)"
+    local REGEX="\-+ [0-9]+ - ([A-Za-z0-9]+).([^\-]+)"
     if [[ $SHEET =~ $REGEX ]]
     then
-        echo ${BASH_REMATCH[1]}
+        echo "${BASH_REMATCH[2]}"
     else
         echo "No matchea"
     fi
