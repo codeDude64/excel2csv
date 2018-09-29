@@ -25,9 +25,6 @@ function XLSX_LOGIC () {
     local DIR_NAME=${DOC_NAME%".xlsx"}
     mkdir $DIR_NAME
     local SHEET=`xlsx2csv -s 0 $1`
-    #echo "$SHEET"
-    #local REGEX="\-+ [0-9]+ - ([^\n]+)([.]+)"
-    #local REGEX="\-+ [0-9]+ - ([A-Za-z0-9]+).([^\-]+)"
     local REGEX="\-{8} [0-9]+ - ([A-Za-z0-9]+).([^\-]+)(.+)"
     local NULL
 
@@ -35,31 +32,19 @@ function XLSX_LOGIC () {
     do
         #echo "${BASH_REMATCH[1]}" #Sheet name
         #echo "${BASH_REMATCH[2]}" #Sheet text
-        echo "${BASH_REMATCH[1]}".csv #Sheet name
-        echo "${BASH_REMATCH[2]}" > $DIR_NAME/"${BASH_REMATCH[1]}".csv #Sheet text
+        echo "${BASH_REMATCH[1]}".csv 
+        echo "${BASH_REMATCH[2]}" > $DIR_NAME/"${BASH_REMATCH[1]}".csv
         SHEET=${BASH_REMATCH[3]}
         
     done
     
-
-    
-
-    # xlsx2csv -s 0 GG.xlsx | grep  "\-\-\-\-\-\-\-\-.[0-9]"   Lista los numeros de las hojas
-    #xlsx2csv -s 0 GG.xlsx | grep  "\-\-\-\-\-\-\-\-.[0-9].-."  Lista los ------------ 1 -
-
-    #sheet=$1 regex=$2 group=$3  if [[ $sheet =~ $regex ]] then   echo ${BASH_REMATCH[$group]}; fi
 }
-
 
 function XLS_LOGIC () {
     echo $1
     libreoffice --headless --convert-to xlsx $1
     XLSX_LOGIC $1"x"
-
-
 }
-
-
 
 if [ $# = 1 ];
 then
@@ -78,18 +63,9 @@ then
         
         else
             echo ""
-            # xls logic
             XLS_LOGIC $1
         fi
 else
     echo "You need just one parameter"
     exit
 fi
-
-
-
-
-
-#COMPARATION=`echo $1 | grep '.xls'`
-
-#echo $COMPARATION
