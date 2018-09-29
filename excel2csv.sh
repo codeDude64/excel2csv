@@ -21,18 +21,22 @@
 
 
 function XLSX_LOGIC () {
-    #echo $1
+    echo $1
     local SHEET=`xlsx2csv -s 0 $1`
     #echo "$SHEET"
     #local REGEX="\-+ [0-9]+ - ([^\n]+)([.]+)"
     #local REGEX="\-+ [0-9]+ - ([A-Za-z0-9]+).([^\-]+)"
     local REGEX="\-{8} [0-9]+ - ([A-Za-z0-9]+).([^\-]+)(.+)"
-    if [[ $SHEET =~ $REGEX ]]
-    then
-        echo "${BASH_REMATCH[3]}"
-    else
-        echo "No matchea"
-    fi
+    local NULL
+
+    while [[ $SHEET =~ $REGEX ]]
+    do
+        echo "${BASH_REMATCH[1]}" #Sheet name
+        echo "${BASH_REMATCH[2]}" #Sheet text
+        SHEET=${BASH_REMATCH[3]}
+        
+    done
+    
 
     
 
@@ -59,17 +63,17 @@ then
     
         if [ "`echo $1 | grep '.xls\>'`" == "" ];
         then
-            echo "this is not a xls file"
+            echo ""
             if [ "`echo $1 | grep '.xlsx\>'`" == "" ];
             then
-                echo "this is not a xlsx file"
+                echo ""
             else
-                echo "this is a xlsx file"
+                echo ""
                 XLSX_LOGIC $1
             fi
         
         else
-            echo "this is a xls file"
+            echo ""
             # xls logic
             XLS_LOGIC $1
         fi
