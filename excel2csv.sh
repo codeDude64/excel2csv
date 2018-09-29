@@ -21,7 +21,9 @@
 
 
 function XLSX_LOGIC () {
-    echo $1
+    local DOC_NAME=$1
+    local DIR_NAME=${DOC_NAME%".xlsx"}
+    mkdir $DIR_NAME
     local SHEET=`xlsx2csv -s 0 $1`
     #echo "$SHEET"
     #local REGEX="\-+ [0-9]+ - ([^\n]+)([.]+)"
@@ -31,8 +33,10 @@ function XLSX_LOGIC () {
 
     while [[ $SHEET =~ $REGEX ]]
     do
-        echo "${BASH_REMATCH[1]}" #Sheet name
-        echo "${BASH_REMATCH[2]}" #Sheet text
+        #echo "${BASH_REMATCH[1]}" #Sheet name
+        #echo "${BASH_REMATCH[2]}" #Sheet text
+        echo "${BASH_REMATCH[1]}".csv #Sheet name
+        echo "${BASH_REMATCH[2]}" > $DIR_NAME/"${BASH_REMATCH[1]}".csv #Sheet text
         SHEET=${BASH_REMATCH[3]}
         
     done
