@@ -42,8 +42,7 @@ function XLSX_LOGIC () {
         SHEET=${BASH_REMATCH[3]}
         
     done
-    #rm -f $DOC_NAME
-    mv $DOC_NAME /tmp
+    rm -f $DOC_NAME
 
 
     
@@ -51,7 +50,7 @@ function XLSX_LOGIC () {
 
 function XLS_LOGIC () {
     echo $1
-    libreoffice --headless --convert-to xlsx $1 && XLSX_LOGIC $1"x" && mv $1 /tmp #&& rm -f $1 
+    libreoffice --headless --convert-to xlsx $1 && XLSX_LOGIC $1"x" && rm -f $1 
     
 }
 
