@@ -23,11 +23,16 @@
 function XLSX_LOGIC () {
     local DOC_NAME=$1
     local DIR_NAME=${DOC_NAME%".xlsx"}
-    mkdir $DIR_NAME
+
+    if  [ -d $DIR_NAME ]; then  # Update the directory
+        rm -r $DIR_NAME
+        mkdir $DIR_NAME
+    else
+        mkdir $DIR_NAME
+    fi
+
     local SHEET=`xlsx2csv -s 0 $1`
     local REGEX="\-{8} [0-9]+ - ([A-Za-z0-9]+).([^\-]+)(.+)"
-    local NULL
-
     while [[ $SHEET =~ $REGEX ]]
     do
         #echo "${BASH_REMATCH[1]}" #Sheet name
@@ -37,12 +42,16 @@ function XLSX_LOGIC () {
         SHEET=${BASH_REMATCH[3]}
         
     done
+    #rm -f $DOC_NAME
+    mv $DOC_NAME /tmp
+
+
     
 }
 
 function XLS_LOGIC () {
     echo $1
-    libreoffice --headless --convert-to xlsx $1 && XLSX_LOGIC $1"x"
+    libreoffice --headless --convert-to xlsx $1 && XLSX_LOGIC $1"x" && mv $1 /tmp #&& rm -f $1 
     
 }
 
